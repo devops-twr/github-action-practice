@@ -1,0 +1,58 @@
+# Workflow
+# should have name
+
+# Jobs
+# Should be inside the workflow
+#steps
+# should be inside the job
+
+# Actions
+# Should be inside the steps
+
+name: Demo CI CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build Job
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Display Message
+        run: echo "Code Checkout Successful"
+
+      - name: Build Application
+        run: echo "Building Application..."
+
+  test:
+    name: Test Job
+    runs-on: ubuntu-latest
+    needs: build
+
+    steps:
+      - name: Run Tests
+        run: echo "Testing Application..."
+
+      - name: Test Success
+        run: echo "All Tests Passed"
+
+  deploy:
+    name: Deploy Job
+    runs-on: ubuntu-latest
+    needs: test
+
+    steps:
+      - name: Deploy Application
+        run: echo "Deploying Application..."
+
+      - name: Deployment Success
+        run: echo "Application Deployed Successfully"
+
+ 
